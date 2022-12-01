@@ -13,31 +13,38 @@
     <div class="=box-login">
         <h2>Login</h2>
         <form action="" method="POST">
-            <input type="text" name="user" placeholder="Username" class="input-control">
-            <input type="password" name="pass" placeholder="Password" class="input-control">
+            <input type="text" name="username" placeholder="Username" class="input-control">
+            <input type="password" name="password" placeholder="Password" class="input-control">
             <input type="submit" name="submit" value="Login" class="btn">
         </form>
-        <?php
-            if(isset($_POST['submit'])){
-                session_start();
-                include 'db.php';
-
-                    $user = $_POST['user'];
-                    $pass = $_POST['pass'];
-    
-                    $cek = mysqli_query($conn, "SELECT * FROM tb_admin WHERE username = '".$user."' AND password = '".MD5($pass)."'");
-                    if(mysqli_num_rows($cek) > 0){
-                    $d = mysqli_fetch_object($cek);
-                    $_SESSION['status_login'] = true;
-                    $_SESSION['a_global'] = $d;
-                    $_SESSION['id'] = $d->admin_id;
-                        echo '<script>window.location="dashboard.php"</script>';
-                }else{
-                    echo '<script>alert("Username atau Password Anda salah")</script>';
-                }
-
-            }
-        ?>
+        <?php 
+ 
+ include 'db.php';
+  
+ error_reporting(0);
+  
+ session_start();
+  
+ if (isset($_SESSION['username'])) {
+     header("Location: index.php");
+ }
+  
+ if (isset($_POST['submit'])) {
+     $username = $_POST['username'];
+     $password = md5($_POST['password']);
+  
+     $sql = "SELECT * FROM tb_admin WHERE username='$username' AND password='$password'";
+     $result = mysqli_query($conn, $sql);
+     if ($result->num_rows > 0) {
+         $row = mysqli_fetch_assoc($result);
+         $_SESSION['username'] = $row['username'];
+         header("Location: index.php");
+     } else {
+         echo "<script>alert('Nama atau password Anda salah. Silahkan coba lagi!')</script>";
+     }
+ }
+  
+ ?>
     </div>
 </body>
 </html>

@@ -27,8 +27,9 @@
                         <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
                         <li><a href="#" class="dropdown" data-bs-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> Login / Sign Up <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Login</a></li>
-                                <li><a href="#">Sign Up</a></li>
+                                <li><a href="login.php">Login</a></li>
+                                <li><a href="register.php">Sign Up</a></li>
+                                <li><a href="logout.php">Logout</a></li>
                             </ul>
                         </li>
                     </ul>
